@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Image Studio</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://jsdelivr.net"></script>
+  <script src="https://cloudflare.com"></script>
 </head>
 <body>
 <div class="container">
   <h1>AI Image Studio</h1>
-  <p class="sub">Upscale, Hapus Background & Hapus Objek tanpa batas harian.</p>
+  <p class="sub">Upscale, Hapus Background & Hapus Objek (100% Browser).</p>
 
   <div class="card">
     <input type="file" id="uploadInput" accept="image/*" />
@@ -24,11 +24,11 @@
   </div>
 
   <div id="tab-upscale" class="card controls">
-    <label>Model Upscaler (ONNX):</label>
+    <label>Model Upscaler:</label>
     <select id="upscaleModel">
-      <option value="https://huggingface.co">4x-UltraSharp (Detail Mikro - 71MB)</option>
-      <option value="https://huggingface.co">4x-UltraSharp V2 (51MB)</option>
-      <option value="https://huggingface.co">4x-ClearReality V1 (Ringan HP - 1.7MB)</option>
+      <option value="https://huggingface.co">4x-ClearReality V1 (Cepat & Ringan HP - 1.7MB)</option>
+      <option value="https://huggingface.co">4x-UltraSharp V2 (Detail Tajam - 51MB)</option>
+      <option value="https://huggingface.co">4x-UltraSharp Original (71MB)</option>
     </select>
     <label>Skala Output:</label>
     <select id="outScale">
@@ -39,12 +39,12 @@
   </div>
 
   <div id="tab-removebg" class="card controls hidden">
-    <p class="sub">Hapus latar belakang menjadi PNG transparan otomatis.</p>
+    <p class="sub">Hapus latar belakang otomatis menggunakan model U2Net (4.7MB - Sangat Ringan).</p>
     <button class="action" id="btnRemoveBg" onclick="runRemoveBg()">Hapus Background</button>
   </div>
 
   <div id="tab-eraser" class="card controls hidden">
-    <p class="sub">Usapkan jari pada objek/watermark yang ingin dihapus.</p>
+    <p class="sub">Usapkan jari pada bagian yang ingin dihapus (merah), lalu tekan Hapus.</p>
     <div class="row">
       <label>Kuas:</label>
       <input type="range" id="brushSize" min="5" max="60" value="25" />
@@ -61,6 +61,6 @@
     </div>
   </div>
 </div>
-<script type="module" src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
