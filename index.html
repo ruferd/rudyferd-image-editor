@@ -9,7 +9,7 @@
 <body>
 <div class="container">
   <h1>AI Image Studio</h1>
-  <p class="sub">Upscale & Hapus Background (Hugging Face Browser AI)</p>
+  <p class="sub">Upscale & Hapus Background (100% Browser)</p>
 
   <div class="card">
     <input type="file" id="uploadInput" accept="image/*" />
@@ -17,8 +17,8 @@
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('upscale')">1. AI Upscaler</button>
-    <button class="tab-btn" onclick="switchTab('removebg')">2. Hapus BG</button>
+    <button type="button" class="tab-btn active" id="btnTabUpscale">1. AI Upscaler</button>
+    <button type="button" class="tab-btn" id="btnTabBg">2. Hapus BG</button>
   </div>
 
   <div id="tab-upscale" class="card controls">
@@ -27,22 +27,22 @@
       <option value="Xenova/swin2SR-classical-sr-x2-64">Swin2SR 2x (Cepat & Natural untuk Adobe Stock)</option>
       <option value="Xenova/swin2SR-realworld-sr-x4-64-bsrgan-psnr">Swin2SR 4x RealWorld (Detail Tajam)</option>
     </select>
-    <button class="action" id="btnUpscale" onclick="runUpscale()">Proses Upscale</button>
+    <button type="button" class="action" id="btnUpscale">Proses Upscale</button>
   </div>
 
   <div id="tab-removebg" class="card controls hidden">
     <p class="sub">Hapus latar belakang otomatis menggunakan model RMBG-1.4 (BRIA AI).</p>
-    <button class="action" id="btnRemoveBg" onclick="runRemoveBg()">Hapus Background</button>
+    <button type="button" class="action" id="btnRemoveBg">Hapus Background</button>
   </div>
 
   <div class="card">
     <div class="canvas-wrap"><canvas id="mainCanvas"></canvas></div>
     <div class="row" style="margin-top:12px;">
-      <button class="action green" onclick="downloadResult()">Download PNG</button>
-      <button class="action gray" onclick="applyResultAsBase()">Terapkan ke Utama</button>
+      <button type="button" class="action green" id="btnDownload">Download PNG</button>
+      <button type="button" class="action gray" id="btnApply">Terapkan ke Utama</button>
     </div>
   </div>
 </div>
-<script type="module" src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
