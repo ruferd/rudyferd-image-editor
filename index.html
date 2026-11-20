@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Image Studio</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="ort.min.js"></script>
 </head>
 <body>
 <div class="container">
   <h1>AI Image Studio</h1>
-  <p class="sub">Upscale, Hapus Background & Hapus Objek (100% Browser).</p>
+  <p class="sub">Upscale & Hapus Background (Hugging Face Browser AI)</p>
 
   <div class="card">
     <input type="file" id="uploadInput" accept="image/*" />
@@ -18,39 +17,22 @@
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('upscale')">1. Upscaler</button>
+    <button class="tab-btn active" onclick="switchTab('upscale')">1. AI Upscaler</button>
     <button class="tab-btn" onclick="switchTab('removebg')">2. Hapus BG</button>
-    <button class="tab-btn" onclick="switchTab('eraser')">3. Hapus Objek</button>
   </div>
 
   <div id="tab-upscale" class="card controls">
-    <label>Model Upscaler:</label>
+    <label>Pilih Model Upscaler:</label>
     <select id="upscaleModel">
-      <option value="https://huggingface.co">4x-ClearReality V1 (Cepat & Ringan HP - 1.7MB)</option>
-      <option value="https://huggingface.co">4x-UltraSharp V2 (Detail Tajam - 51MB)</option>
-      <option value="https://huggingface.co">4x-UltraSharp Original (71MB)</option>
-    </select>
-    <label>Skala Output:</label>
-    <select id="outScale">
-      <option value="2">2x (Rekomendasi Adobe Stock)</option>
-      <option value="4">4x (Ukuran Penuh)</option>
+      <option value="Xenova/swin2SR-classical-sr-x2-64">Swin2SR 2x (Cepat & Natural untuk Adobe Stock)</option>
+      <option value="Xenova/swin2SR-realworld-sr-x4-64-bsrgan-psnr">Swin2SR 4x RealWorld (Detail Tajam)</option>
     </select>
     <button class="action" id="btnUpscale" onclick="runUpscale()">Proses Upscale</button>
   </div>
 
   <div id="tab-removebg" class="card controls hidden">
-    <p class="sub">Hapus latar belakang otomatis menggunakan model U2Net (4.7MB - Sangat Ringan).</p>
+    <p class="sub">Hapus latar belakang otomatis menggunakan model RMBG-1.4 (BRIA AI).</p>
     <button class="action" id="btnRemoveBg" onclick="runRemoveBg()">Hapus Background</button>
-  </div>
-
-  <div id="tab-eraser" class="card controls hidden">
-    <p class="sub">Usapkan jari pada bagian yang ingin dihapus (merah), lalu tekan Hapus.</p>
-    <div class="row">
-      <label>Kuas:</label>
-      <input type="range" id="brushSize" min="5" max="60" value="25" />
-      <button type="button" class="reset-btn" onclick="clearMask()">Reset</button>
-    </div>
-    <button class="action" id="btnErase" onclick="runInpaint()">Hapus Objek (LaMa AI)</button>
   </div>
 
   <div class="card">
@@ -61,6 +43,6 @@
     </div>
   </div>
 </div>
-<script src="app.js"></script>
+<script type="module" src="app.js"></script>
 </body>
 </html>
