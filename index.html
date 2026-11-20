@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Image Studio</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://jsdelivr.net"></script>
+</head>
+<body>
+<div class="container">
+  <h1>AI Image Studio</h1>
+  <p class="sub">Upscale, Hapus Background & Hapus Objek tanpa batas harian.</p>
+
+  <div class="card">
+    <input type="file" id="uploadInput" accept="image/*" />
+    <div id="status">Silakan pilih gambar terlebih dahulu.</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('upscale')">1. Upscaler</button>
+    <button class="tab-btn" onclick="switchTab('removebg')">2. Hapus BG</button>
+    <button class="tab-btn" onclick="switchTab('eraser')">3. Hapus Objek</button>
+  </div>
+
+  <div id="tab-upscale" class="card controls">
+    <label>Model Upscaler (ONNX):</label>
+    <select id="upscaleModel">
+      <option value="https://huggingface.co">4x-UltraSharp (Detail Mikro - 71MB)</option>
+      <option value="https://huggingface.co">4x-UltraSharp V2 (51MB)</option>
+      <option value="https://huggingface.co">4x-ClearReality V1 (Ringan HP - 1.7MB)</option>
+    </select>
+    <label>Skala Output:</label>
+    <select id="outScale">
+      <option value="2">2x (Rekomendasi Adobe Stock)</option>
+      <option value="4">4x (Ukuran Penuh)</option>
+    </select>
+    <button class="action" id="btnUpscale" onclick="runUpscale()">Proses Upscale</button>
+  </div>
+
+  <div id="tab-removebg" class="card controls hidden">
+    <p class="sub">Hapus latar belakang menjadi PNG transparan otomatis.</p>
+    <button class="action" id="btnRemoveBg" onclick="runRemoveBg()">Hapus Background</button>
+  </div>
+
+  <div id="tab-eraser" class="card controls hidden">
+    <p class="sub">Usapkan jari pada objek/watermark yang ingin dihapus.</p>
+    <div class="row">
+      <label>Kuas:</label>
+      <input type="range" id="brushSize" min="5" max="60" value="25" />
+      <button type="button" class="reset-btn" onclick="clearMask()">Reset</button>
+    </div>
+    <button class="action" id="btnErase" onclick="runInpaint()">Hapus Objek (LaMa AI)</button>
+  </div>
+
+  <div class="card">
+    <div class="canvas-wrap"><canvas id="mainCanvas"></canvas></div>
+    <div class="row" style="margin-top:12px;">
+      <button class="action green" onclick="downloadResult()">Download PNG</button>
+      <button class="action gray" onclick="applyResultAsBase()">Terapkan ke Utama</button>
+    </div>
+  </div>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
