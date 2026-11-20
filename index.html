@@ -5,7 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Image Studio</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cloudflare.com"></script>
+  <script>
+    function loadOrt(urls, index = 0) {
+      if (index >= urls.length) {
+        document.getElementById('status').textContent = 'Gagal memuat mesin AI dari semua server. Coba matikan AdBlocker/VPN.';
+        return;
+      }
+      const s = document.createElement('script');
+      s.src = urls[index];
+      s.onload = () => {
+        const base = urls[index].substring(0, urls[index].lastIndexOf('/') + 1);
+        ort.env.wasm.wasmPaths = base;
+        console.log('ONNX Runtime berhasil dimuat dari:', urls[index]);
+      };
+      s.onerror = () => loadOrt(urls, index + 1);
+      document.head.appendChild(s);
+    }
+    loadOrt([
+      'https://unpkg.com',
+      'https://cloudflare.com',
+      'https://jsdelivr.net'
+    ]);
+  </script>
 </head>
 <body>
 <div class="container">
